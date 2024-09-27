@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group .gender {
+            display: inline-block;
+            width: 48%;
+        }
+
+        .form-group .gender input {
+            width: auto;
+        }
+
+        .form-group .gender label {
+            display: inline;
+            margin-left: 5px;
+        }
+
+        .form-group .validation {
+            color: green;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .email-validation {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .email-validation input {
+            width: 70%;
+        }
+
+        .email-validation button {
+            width: 28%;
+            background-color: #007BFF;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>회원가입</h2>
+    <form enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="username">아이디</label>
+            <input type="text" id="username" placeholder="아이디 입력">
+            <button type="button">중복 확인</button>
+            <p class="validation">사용 가능한 아이디 입니다.</p>
+        </div>
+
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" placeholder="비밀번호 입력">
+        </div>
+
+        <div class="form-group">
+            <label for="password-confirm">비밀번호 확인</label>
+            <input type="password" id="password-confirm" placeholder="비밀번호 확인">
+            <p class="validation">비밀번호가 일치합니다.</p>
+        </div>
+
+        <div class="form-group email-validation">
+            <input type="email" id="email" placeholder="이메일 입력">
+            <button type="button">인증번호 받기</button>
+        </div>
+
+        <div class="form-group email-validation">
+            <input type="text" id="email-code" placeholder="인증번호 입력">
+            <button type="button">인증 확인</button>
+            <p class="validation">이메일 인증이 완료되었습니다.</p>
+        </div>
+
+        <div class="form-group">
+            <label>성별</label>
+            <div class="gender">
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">남성</label>
+            </div>
+            <div class="gender">
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">여성</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="nickname">닉네임</label>
+            <input type="text" id="nickname" placeholder="닉네임 입력">
+        </div>
+
+        <div class="form-group">
+            <label for="job">직업</label>
+            <input type="text" id="job" placeholder="직업 입력">
+        </div>
+
+        <div class="form-group">
+            <label for="birthdate">생년월일</label>
+            <input type="text" id="birthdate" placeholder="생년월일 입력 (예: 990101)">
+        </div>
+
+        <!-- 프로필 사진 첨부 -->
+        <div class="form-group">
+            <label for="profile-picture">프로필 사진</label>
+            <input type="file" id="profile-picture" accept="image/*">
+        </div>
+
+        <div class="form-group">
+            <button type="submit">가입 하기</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

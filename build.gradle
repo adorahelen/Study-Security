@@ -34,6 +34,11 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // JWT 서비스 적용 후, 오스랑 통합하기
+    implementation 'io.jsonwebtoken:jjwt:0.9.1' // jwt 라이브러리
+    implementation 'javax.xml.bind:jaxb-api:2.3.1' // xml 문서와 java 객체 간 매핑 자동화
+
 }
 
 tasks.named('test') {

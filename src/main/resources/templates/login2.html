@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .social-login img {
+            width: 40px;
+            cursor: pointer;
+        }
+
+        .link-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .link-group a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .link-group a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>로그인</h2>
+    <form>
+        <div class="form-group">
+            <input type="text" placeholder="아이디">
+        </div>
+
+        <div class="form-group">
+            <input type="password" placeholder="비밀번호">
+        </div>
+
+        <div class="form-group options">
+            <label>
+                <input type="checkbox"> 아이디 저장
+            </label>
+            <label>
+                <input type="checkbox"> 자동 로그인
+            </label>
+        </div>
+
+        <div class="form-group">
+            <button type="submit">로그인</button>
+        </div>
+
+        <div class="social-login">
+            <img src="google-icon.png" alt="Google Login">
+            <img src="github-icon.png" alt="Github Login">
+        </div>
+
+        <div class="link-group">
+            <a href="#">아이디 찾기</a>
+            <a href="#">비밀번호 찾기</a>
+            <a href="#">회원가입</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
