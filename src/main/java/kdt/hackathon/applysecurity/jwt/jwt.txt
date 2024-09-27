@@ -1,0 +1,12 @@
+1. config/CustomSecurityConfig : 모든 시큐리티 설정 관리 및 지정
+
+2. jwt
+- jwt/JwtAuthenticationFilter : 지정한 url을 제외하고 전부 JwtAuthenticationFilter를 거침
+- jwt/JwtProperties : yml 지정한 비밀키를 객체로 가지고 와서 사용(나는 그냥 여기서 지정함 ->공개)
+- jwt/JwTokenProvider : 토큰 메소드를 담김(생성, 검증, 조회,  복호화)
+
+3. UserDetailService
+
+
+
+}

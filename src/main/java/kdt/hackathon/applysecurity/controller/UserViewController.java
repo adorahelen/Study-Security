@@ -10,6 +10,8 @@ public class UserViewController {
         return "login";
     } // 이메일 부분을 전화번호를 입력하라고만 수정하면 될듯
 
+
+
     @GetMapping("/signup")
     public String signup() {
         return "signup";

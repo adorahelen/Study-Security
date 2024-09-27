@@ -1,0 +1,16 @@
+: 컨피그에서는 다양한 스프링 시큐리티 필터들을 커스터마이징해서 관리한다. (이때 @Bean )
+
+1. 세션 기반 인증
+세션 기반 인증에서는 AuthenticationManager를 통해 UserDetailsService와 비밀번호 인코더를 설정하는 부분이 필요하지만,
+JWT 방식에서는 요청 시마다 토큰을 검증하므로 직접적으로 인증 정보를 처리하는 필터만 필요
+
+ // @Bean
+ // public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, UserDetailsService userDetailsService) throws Exception {
+ //     return http.getSharedObject(AuthenticationManagerBuilder.class)
+ //            .userDetailsService(userDetailsService) // 사용자 정보 서비스 설정
+ //            .passwordEncoder(bCryptPasswordEncoder)
+ //            .and()
+ //            .build();
+ // }
+
+ => http.addFilterBefore(new JwtExceptionHandlingFilter(), JwtAuthenticationFilter.class);

@@ -1,23 +1,27 @@
 package kdt.hackathon.applysecurity.config;
 
 
+import kdt.hackathon.applysecurity.jwt.JwtAuthenticationFilter;
+import kdt.hackathon.applysecurity.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @RequiredArgsConstructor
 @Configuration
 @Log4j2
+@EnableWebSecurity
 public class CustomSecurityConfig {
 
-
+    private final JwtTokenProvider jwtTokenProvider;
 
 
     @Bean
@@ -48,14 +52,31 @@ public class CustomSecurityConfig {
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/login");
 
-
+        http.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),UsernamePasswordAuthenticationFilter.class);
+        // @Bean
+        // public AuthenticationManager -> JwtAuthenticationFilter
+        // : 기존 세션 기반 인증 방식에서, 로그인 요청을 처리하고 세션을 생성하는 역할
+        //   ->  토큰을 이용해 요청이 들어올 때마다 해당 토큰의 유효성을 검증하고, 인증 정보를 설정하는 방식
 
 
         return http.build();
     }
-    @Bean
-    public PasswordEncoder passwordEncoder() {
+// =========================================================
+
+    @Bean // security default 1 등록
+    public WebSecurityCustomizer configure() {
+        return (web) -> web.ignoring()
+                .requestMatchers("/img/**", "/css/**", "/js/**", "/fonts/**", "/images/**", "/webjars/**");
+    }
+
+    @Bean // security default 2 등록
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean // jwt 1 등록
+    public JwtAuthenticationFilter tokenAuthenticationFilter() {
+        return new JwtAuthenticationFilter(jwtTokenProvider);
     }
 
 }

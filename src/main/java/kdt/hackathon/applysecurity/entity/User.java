@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "user", schema = "itclips")
 public class User {
 
@@ -24,7 +25,7 @@ public class User {
     @Column(name = "password", nullable = false, length = 511)
     private String password;
 
-    @Column(name = "nickname", nullable = false, length = 50)
+    @Column(name = "nickname")
     private String nickname;
 
     @Column(name = "profile_image")
@@ -52,6 +53,8 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
+    public User(User build) {
+    }
 
 
     public User update(String profileImage) {
@@ -60,9 +63,6 @@ public class User {
         return this;
     }
 
-    public String getRoleKey() {
-        return this.role.getKey();
-    }
 
     @Builder
     public User(Long id, String email, String password, String nickname, String profileImage,

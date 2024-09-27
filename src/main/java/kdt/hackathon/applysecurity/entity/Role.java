@@ -1,14 +1,21 @@
 package kdt.hackathon.applysecurity.entity;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
 public enum Role {
-    USER("ROLE_USER", "일반 사용자"),
-    ADMIN("ROLE_ADMIN", "관리자");
 
-    private final String key;
-    private final String title;
+    ROLE_ADMIN("admin"),
+    ROLE_USER("user");
+
+    private final String description;
+
+    Role(String description) {
+        this.description = description;
+    }
+
+    public String getAuthority() {return this.name();}
 }
+
+
+
