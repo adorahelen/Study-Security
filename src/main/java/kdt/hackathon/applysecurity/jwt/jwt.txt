@@ -5,7 +5,16 @@
 - jwt/JwtProperties : yml 지정한 비밀키를 객체로 가지고 와서 사용(나는 그냥 여기서 지정함 ->공개)
 - jwt/JwTokenProvider : 토큰 메소드를 담김(생성, 검증, 조회,  복호화)
 
-3. UserDetailService
+
+3. 회원가입은 토큰 발행이 필요없다.
+컨트롤러에서 dto 를 통해 정보를 전달, 서비스 단에서 BCryptPasswordEncoder 인코딩 : 암호화
+    리포지토리 단에서 디비에 저장시킨다.
+
+=> 로그인 시도 if 회원이 아님, failHandler
+            else 회원, successHandler -> 엑세스 토큰&리프레쉬 토큰 발행
+                                     -> 만료시 엑세스 재발급
+                                     로그아웃시 -> 토큰 삭제?
+
 
 
 
