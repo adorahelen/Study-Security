@@ -1,17 +1,15 @@
 package kdt.hackathon.applysecurity.entity;
 
 import jakarta.persistence.*;
-//import kdt.hackathon.applysecurity.dto.UserInfoDetailDTO;
 import lombok.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "user", schema = "itclips")
+@Table(name = "user")
 public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

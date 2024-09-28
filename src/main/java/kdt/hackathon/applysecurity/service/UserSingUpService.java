@@ -17,13 +17,23 @@ public class UserSingUpService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Long save(WebSingUpRequest singUpData) {
-        User user = User.builder()
-                .email(singUpData.getEmail())
-                .password(bCryptPasswordEncoder.encode(singUpData.getPassword()))
-                .role(Role.ROLE_USER)
-                .build();
 
-        return userRepository.save(user).getId();
+
+        Boolean isExist = userRepository.existsByEmail(singUpData.getEmail());
+
+        if (isExist) {
+            return null;
+        }
+
+        else {
+            User user = User.builder()
+                    .email(singUpData.getEmail())
+                    .password(bCryptPasswordEncoder.encode(singUpData.getPassword()))
+                    .role(Role.ROLE_USER)
+                    .build();
+
+            return userRepository.save(user).getId();
+        }
 
     }
 }

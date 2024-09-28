@@ -33,17 +33,23 @@
                         <button type="submit" class="btn btn-primary">접속</button>
                     </form>
 
+
                     <button type="button" class="btn btn-secondary mt-3" onclick="location.href='/signup'">회원가입</button>
 
                     <!-- 구글 로그인 버튼 추가 -->
 <!--                    <div class="mt-3">-->
 <!--                        <a href="/oauth2/authorization/google" class="btn btn-danger">구글 로그인</a>-->
 <!--                    </div>-->
+                    <div th:if="${loginError}">
+                        <p style="color:red;">비밀번호가 틀리거나 없는 유저입니다.</p>
+                    </div>
 
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
 </body>
 </html>

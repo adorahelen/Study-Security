@@ -3,13 +3,18 @@ package kdt.hackathon.applysecurity.config;
 
 import kdt.hackathon.applysecurity.jwt.JwtAuthenticationFilter;
 import kdt.hackathon.applysecurity.jwt.JwtTokenProvider;
+import kdt.hackathon.applysecurity.login.CustomAuthenticationFailureHandler;
+import kdt.hackathon.applysecurity.security.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -40,8 +45,9 @@ public class CustomSecurityConfig {
 
                 .formLogin()
                 .loginPage("/login")
-                .failureUrl("/login-error")
                 .defaultSuccessUrl("/service")
+                .failureHandler(new CustomAuthenticationFailureHandler())
+                .permitAll()
 
                 .and()
                 .logout()
