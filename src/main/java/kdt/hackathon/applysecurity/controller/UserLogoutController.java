@@ -9,3 +9,4 @@ public class UserLogoutController {
     @PostMapping("/logout")
     public String logout() {return "redirect:/login";}
 }
+// <form action="/logout" method="POST">

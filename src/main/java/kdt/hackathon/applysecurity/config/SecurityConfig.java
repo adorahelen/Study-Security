@@ -44,7 +44,7 @@ public class SecurityConfig {
                         .failureHandler(authFailureHandler) // 로그인 실패시 안에 지정한 위치로 이동
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/api/v1/auth/logout") // 변경 필요. 현재 404
+                        .logoutUrl("/logout") // <form action="/logout" method="POST"> : @PostMapping("/logout")
                         .logoutSuccessUrl("/login")
                 );
 
