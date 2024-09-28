@@ -1,4 +1,4 @@
-
+https://docs.spring.io/spring-security/site/docs/current/api/
 
 # 로그인 방식의 종류 
 <img width="623" alt="image" src="https://github.com/user-attachments/assets/d96becce-b677-47eb-96ac-f978e62298b4">
