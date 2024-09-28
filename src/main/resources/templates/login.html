@@ -24,7 +24,7 @@
                         <input type="hidden" th:name="${_csrf?.parameterName}" th:value="${_csrf?.token}" />
                         <div class="mb-3">
                             <label class="form-label text-white">이메일 입력해주세요!</label>
-                            <input type="email" class="form-control" name="email">
+                            <input type="email" class="form-control" name="username">
                         </div>
                         <div class="mb-3">
                             <label class="form-label text-white">비밀번호 입력해주세요!</label>
@@ -32,7 +32,8 @@
                         </div>
                         <button type="submit" class="btn btn-primary">접속</button>
                     </form>
-
+<!--로그인 폼에서 보내는 이름이 달라지면 문제가 생길 수 있음 -->
+<!--                    디폴트는 유저네임 / 패스워드 -> 따로 시큐리티 컨피그에 명시해야 함 -->
 
                     <button type="button" class="btn btn-secondary mt-3" onclick="location.href='/signup'">회원가입</button>
 
@@ -53,3 +54,4 @@
 
 </body>
 </html>
+
