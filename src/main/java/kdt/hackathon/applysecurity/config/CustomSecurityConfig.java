@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -63,11 +62,6 @@ public class CustomSecurityConfig {
     }
 // =========================================================
 
-    @Bean // security default 1 등록
-    public WebSecurityCustomizer configure() {
-        return (web) -> web.ignoring()
-                .requestMatchers("/img/**", "/css/**", "/js/**", "/fonts/**", "/images/**", "/webjars/**");
-    }
 
     @Bean // security default 2 등록
     public BCryptPasswordEncoder passwordEncoder() {

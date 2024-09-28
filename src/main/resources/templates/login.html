@@ -23,8 +23,8 @@
                     <form action="/login" method="POST">
                         <input type="hidden" th:name="${_csrf?.parameterName}" th:value="${_csrf?.token}" />
                         <div class="mb-3">
-                            <label class="form-label text-white">전화번호(아이디) 입력해주세요!</label>
-                            <input type="phoneNumber" class="form-control" name="username">
+                            <label class="form-label text-white">이메일 입력해주세요!</label>
+                            <input type="email" class="form-control" name="email">
                         </div>
                         <div class="mb-3">
                             <label class="form-label text-white">비밀번호 입력해주세요!</label>
@@ -36,9 +36,9 @@
                     <button type="button" class="btn btn-secondary mt-3" onclick="location.href='/signup'">회원가입</button>
 
                     <!-- 구글 로그인 버튼 추가 -->
-                    <div class="mt-3">
-                        <a href="/oauth2/authorization/google" class="btn btn-danger">구글 로그인</a>
-                    </div>
+<!--                    <div class="mt-3">-->
+<!--                        <a href="/oauth2/authorization/google" class="btn btn-danger">구글 로그인</a>-->
+<!--                    </div>-->
 
                 </div>
             </div>

@@ -25,21 +25,24 @@
                         <input type="hidden" th:name="${_csrf?.parameterName}" th:value="${_csrf?.token}" />
 
                         <div class="mb-3">
-                            <label class="form-label text-white">전화번호(아이디)</label>
-                            <input type="phoneNumber" class="form-control" name="phoneNumber">
+                            <label class="form-label text-white">사용할 이메일</label>
+                            <input type="email" class="form-control" name="email">
                         </div>
+
                         <div class="mb-3">
-                            <label class="form-label text-white">비밀번호</label>
+                            <label class="form-label text-white">사용할 비밀번호</label>
                             <input type="password" class="form-control" name="password">
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label text-white">생년월일(6자리)</label>
-                            <input type="birthDate" class="form-control" name="birthDate">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label text-white">성함(이름)</label>
-                            <input type="name" class="form-control" name="name">
-                        </div>
+
+<!--                        <div class="mb-3">-->
+<!--                            <label class="form-label text-white">생년월일(6자리)</label>-->
+<!--                            <input type="birthDate" class="form-control" name="birthDate">-->
+<!--                        </div>-->
+<!--                        -->
+<!--                        <div class="mb-3">-->
+<!--                            <label class="form-label text-white">성함(이름)</label>-->
+<!--                            <input type="name" class="form-control" name="name">-->
+<!--                        </div>-->
 
                         <button type="submit" class="btn btn-primary">등록</button>
                     </form>
