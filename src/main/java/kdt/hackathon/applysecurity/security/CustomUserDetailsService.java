@@ -2,6 +2,7 @@ package kdt.hackathon.applysecurity.security;
 
 import kdt.hackathon.applysecurity.entity.User;
 import kdt.hackathon.applysecurity.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,7 +17,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
-    }
+    } // 생성자라서 어노테이션 붙이면 지워도 ㄱㅊ
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
