@@ -20,37 +20,62 @@
                 <p class="text-white-50 mt-2 mb-5">서비스를 사용하려면 로그인을 해주세요!</p>
 
                 <div class="mb-2">
-                    <form action="/login" method="POST">
-                        <input type="hidden" th:name="${_csrf?.parameterName}" th:value="${_csrf?.token}" />
+<!--                    <form action="/login" method="POST">-->
+<!--                        <input type="hidden" th:name="${_csrf?.parameterName}" th:value="${_csrf?.token}" />-->
+
+
                         <div class="mb-3">
                             <label class="form-label text-white">이메일 입력해주세요!</label>
-                            <input type="email" class="form-control" name="username">
+<!--                            <input type="email" class="form-control" name="username">-->
+                            <input type="email" class="form-control" name="username" id="email">  <!-- ID 추가 -->
+
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label text-white">비밀번호 입력해주세요!</label>
-                            <input type="password" class="form-control" name="password">
+                            <input type="password" class="form-control" name="password" id="password">
                         </div>
-                        <button type="submit" class="btn btn-primary">접속</button>
-                    </form>
+
+
+                    <!-- 로그인 버튼 -->
+                    <div class="mb-2">
+                        <button id="login-btn" type="button" class="btn btn-primary">접속</button>
+
+                    </div>
+
+                    <!--                    </form>-->
 <!--로그인 폼에서 보내는 이름이 달라지면 문제가 생길 수 있음 -->
 <!--                    디폴트는 유저네임 / 패스워드 -> 따로 시큐리티 컨피그에 명시해야 함 -->
 
+                    <!-- 회원가입 버튼 -->
+                    <div class="mb-2">
                     <button type="button" class="btn btn-secondary mt-3" onclick="location.href='/signup'">회원가입</button>
+                    </div>
+
 
                     <!-- 구글 로그인 버튼 추가 -->
 <!--                    <div class="mt-3">-->
 <!--                        <a href="/oauth2/authorization/google" class="btn btn-danger">구글 로그인</a>-->
 <!--                    </div>-->
+
+
                     <div th:if="${loginError}">
                         <p style="color:red;">비밀번호가 틀리거나 없는 유저입니다.</p>
                     </div>
 
+
                 </div>
+
+
+
+
             </div>
         </div>
     </div>
 </section>
 
+
+<script src="/loginJson.js"></script>
 
 </body>
 </html>
