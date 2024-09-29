@@ -17,12 +17,19 @@ https://docs.spring.io/spring-security/site/docs/current/api/
 ## 회원가입/로그인 방식 설계도 
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/7173c42f-860e-47d2-811a-2f7aa6f9d082">
 
-- 어떻게 구현하냐에 따라서, 세션 방식 || 토큰 방식 달라짐 
+- 어떻게 구현하냐에 따라서, 세션 방식 || 토큰 방식 달라짐
+- 위 사진은 전부 스프링시큐리티에게 위임하여, 회원가입 로직 및 로그인 뷰페이지 말고는, 유저디테일 및 디테일 서비스만 구현하면 됨 
 
 ## 세션방식 아키텍처
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/e9e5ae69-9a8a-45e2-b60c-cfdb86104513">
+<img width="901" alt="image" src="https://github.com/user-attachments/assets/25448e9a-3769-4662-a0cb-359aecd24d9c">
+
 
 - 위 사진은, 스프링 시큐리티에서 제공하는 기본적인 세션 기반의 로그인 아키텍처이다.
+- 세션 + 쿠키를 사용하는 Spring Security의 Form Login
+- 여기서 토큰을 사용하지 않고, 기본으로 주어지는 form 기반이 아닌, json 방식에 REST API 로 바꿈 -> 전부 수동으로 바꿔여한다.
+    * -> Custom Authentication Filter 구현 1.  UsernamePasswordAuthenticationFilter
+    * Security Configuration 설정 (폼 로그인 사용 안함)
 
 ## 토큰방식 아키텍처
 <img width="936" alt="image" src="https://github.com/user-attachments/assets/d143a69f-2ed0-4eae-bbb8-f9afb3b3ff76">
@@ -31,4 +38,14 @@ https://docs.spring.io/spring-security/site/docs/current/api/
 
 ## 세션x, 토큰 아키텍처
 <img width="623" alt="image" src="https://github.com/user-attachments/assets/e1046150-4bb3-401f-a78e-1c3c46b072cc">
+
+- 기존 로그인 당시(폼 로그인&스프링 제공하는 세션 기반) 주어진 것들 사용
+    * 필터체인 자동, 인증매니저 자동, 유저디테일 및 디테일 서비스만 구현해 놓으면 자동으로 인증 검사 후에 컨텍스트에 저장하고 홀더로 접근함
+    * -> 회원가입만 컨트롤러-서비스-리포 로직 작성, 프론트가 form 으로 쏘면, 시큐리티가 나머지 처리(단 이때 시큐리티 컨피그-디테일 서비스-디테일은 필요)
+      
+<img width="1050" alt="image" src="https://github.com/user-attachments/assets/74c56084-d274-4dd1-8e7e-4850f81e27ae">
+ 
+
+- 똑같은 아키텍처지만, 여기서 login page 가 form이 아닌, JSON 으로 데이터를 쏘게 수정함 (for token)
+    * -> 시큐리티가 자동으로 해주던 필터 및 인증 매니저를 전부 커스텀해서 구현해 놓아야 함
 
