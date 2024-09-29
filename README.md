@@ -21,10 +21,11 @@ https://docs.spring.io/spring-security/site/docs/current/api/
 
 ## 세션방식 아키텍처
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/e9e5ae69-9a8a-45e2-b60c-cfdb86104513">
-<img width="967" alt="image" src="https://github.com/user-attachments/assets/25448e9a-3769-4662-a0cb-359aecd24d9c">
+<img width="901" alt="image" src="https://github.com/user-attachments/assets/25448e9a-3769-4662-a0cb-359aecd24d9c">
 
 
 - 위 사진은, 스프링 시큐리티에서 제공하는 기본적인 세션 기반의 로그인 아키텍처이다.
+- 세션 + 쿠키를 사용하는 Spring Security의 Form Login 
 
 ## 토큰방식 아키텍처
 <img width="936" alt="image" src="https://github.com/user-attachments/assets/d143a69f-2ed0-4eae-bbb8-f9afb3b3ff76">
