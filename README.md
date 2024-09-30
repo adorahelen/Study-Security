@@ -42,7 +42,9 @@ https://docs.spring.io/spring-security/site/docs/current/api/
 
 
 ## (JSON data -> jwt)
+<img width="901" alt="image" src="https://github.com/user-attachments/assets/34c98069-378a-46a5-b4bb-ac96dd07c415">
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/d143a69f-2ed0-4eae-bbb8-f9afb3b3ff76">
+
 - 정리 중
 
 
