@@ -21,6 +21,5 @@ public class UserViewController {
     }
 
     @GetMapping("/admin")
-    public String admin() {
-        return "admin";}
+    public String admin() {return "admin";}
 }

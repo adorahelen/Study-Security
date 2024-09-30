@@ -18,6 +18,7 @@
 //
 //    private final CustomAuthSuccessHandler authSuccessHandler;
 //    private final CustomAuthFailureHandler authFailureHandler;
+//    // 핸들러를 통해 로그인 성공&실패 반응 처리 || http.formLogin.defaultSuccess 로도 지정 가능
 //
 //    private static final String[] AUTH_WHITELIST = {
 //            "/swagger-ui/**", "/", "/login", "/signup","/user",
