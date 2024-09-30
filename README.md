@@ -23,8 +23,11 @@ https://docs.spring.io/spring-security/site/docs/current/api/
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/e9e5ae69-9a8a-45e2-b60c-cfdb86104513">
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/7173c42f-860e-47d2-811a-2f7aa6f9d082">
 
-- 어떻게 구현하냐에 따라서, 세션 방식 || 토큰 방식 달라짐
-- 위 사진은 전부 스프링시큐리티에게 위임하여, 회원가입 로직 및 로그인 뷰페이지 말고는, 유저디테일 및 디테일 서비스만 구현하면 됨 
+- 위 사진은 전부 스프링시큐리티에게 위임 (자동)
+- 구현 내용
+    * 뷰페이지 띄우기
+    * 회원가입 로직
+    * Class : UserDetail, UserDetailService 
 
 ## 세션방식 아키텍처
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/25448e9a-3769-4662-a0cb-359aecd24d9c">
