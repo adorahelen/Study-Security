@@ -70,6 +70,10 @@ https://docs.spring.io/spring-security/site/docs/current/api/
 	6.	로그아웃: 클라이언트 측에서 JWT를 삭제하면 로그아웃 처리가 됩니다. 서버는 상태를 저장하지 않기 때문에 별도로 세션을 만료시킬 필요는 없습니다.
 
 
+- 세션과 토큰의 차이
+
+<img width="901" alt="image" src="https://github.com/user-attachments/assets/529905ce-761d-4b65-99c6-5b6eeb32fa14">
+
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/34c98069-378a-46a5-b4bb-ac96dd07c415">
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/d143a69f-2ed0-4eae-bbb8-f9afb3b3ff76">
 
