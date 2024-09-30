@@ -14,14 +14,19 @@ https://docs.spring.io/spring-security/site/docs/current/api/
  - 토큰 역시 안정성을 높이기위해 리프레쉬토큰, 블랙리스트 등을 통해 부분적으로 상태를 저장하기도 한다.
     * 역설적이게도 이러면 서로가 점점 서로의 방식으로 역전되는 상황이 발생하게 됨
   
-## 회원가입/로그인 방식 설계도 
+- 목차
+    * 프론트: html, form 태그(@ModelAttribute) -> (스프링 시큐리티 자동/ 세션저장)
+    * 프론트: js, JSON 데이터(@RequestBody) -> (수동으로 재정의 필수/ 세션저장)
+    * 프론트: js, JSON 데이터(@RequestBody) -> (수동으로 재정의 필수/ jwt발행)
+  
+## (HTML form + session)
+<img width="901" alt="image" src="https://github.com/user-attachments/assets/e9e5ae69-9a8a-45e2-b60c-cfdb86104513">
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/7173c42f-860e-47d2-811a-2f7aa6f9d082">
 
 - 어떻게 구현하냐에 따라서, 세션 방식 || 토큰 방식 달라짐
 - 위 사진은 전부 스프링시큐리티에게 위임하여, 회원가입 로직 및 로그인 뷰페이지 말고는, 유저디테일 및 디테일 서비스만 구현하면 됨 
 
 ## 세션방식 아키텍처
-<img width="901" alt="image" src="https://github.com/user-attachments/assets/e9e5ae69-9a8a-45e2-b60c-cfdb86104513">
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/25448e9a-3769-4662-a0cb-359aecd24d9c">
 
 
@@ -48,4 +53,6 @@ https://docs.spring.io/spring-security/site/docs/current/api/
 
 - 똑같은 아키텍처지만, 여기서 login page 가 form이 아닌, JSON 으로 데이터를 쏘게 수정함 (for token)
     * -> 시큐리티가 자동으로 해주던 필터 및 인증 매니저를 전부 커스텀해서 구현해 놓아야 함
+
+<img width="947" alt="image" src="https://github.com/user-attachments/assets/03d3a319-c911-4aa3-b017-fee533e8f1fa">
 
