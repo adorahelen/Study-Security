@@ -1,6 +1,7 @@
 package kdt.hackathon.applysecurity.security;
 
 import kdt.hackathon.applysecurity.entity.User;
+import kdt.hackathon.applysecurity.entity.UserDTO;
 import kdt.hackathon.applysecurity.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +24,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-        return new CustomUserDetails(user);
+
+        // return entity --> dto
+        UserDTO userDTO = user.toUserInfoDto();
+        return new CustomUserDetails(userDTO);
     }
 }

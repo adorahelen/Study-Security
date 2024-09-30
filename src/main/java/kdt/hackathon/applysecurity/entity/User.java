@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -35,5 +34,13 @@ public class User {
         this.password = password;
         this.role = role;
 
+    }
+
+    public UserDTO toUserInfoDto() {
+        return UserDTO.builder()
+                .email(getEmail())
+                .password(getPassword())
+                .role(getRole())
+                .build();
     }
 }

@@ -14,7 +14,7 @@
 //@EnableWebSecurity
 //@Configuration
 //@RequiredArgsConstructor
-//public class SecurityConfig {
+//public class SecurityConfigForm {
 //
 //    private final CustomAuthSuccessHandler authSuccessHandler;
 //    private final CustomAuthFailureHandler authFailureHandler;
