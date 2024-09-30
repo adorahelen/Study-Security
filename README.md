@@ -20,6 +20,7 @@ https://docs.spring.io/spring-security/site/docs/current/api/
     * 프론트: js, JSON 데이터(@RequestBody) -> (수동으로 재정의 필수/ jwt발행)
   
 ## (HTML form -> session)
+<img width="901" alt="image" src="https://github.com/user-attachments/assets/3a446d9f-faa2-4e3b-89be-e1fdac018696">
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/e9e5ae69-9a8a-45e2-b60c-cfdb86104513">
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/7173c42f-860e-47d2-811a-2f7aa6f9d082">
 
@@ -31,6 +32,7 @@ https://docs.spring.io/spring-security/site/docs/current/api/
     * front : html, { form action="/login" method="POST" }
 
 ## (JSON data -> session)
+<img width="901" alt="image" src="https://github.com/user-attachments/assets/64612a2d-cd92-41e0-8b08-5c9fa69f8080">
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/03d3a319-c911-4aa3-b017-fee533e8f1fa">
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/25448e9a-3769-4662-a0cb-359aecd24d9c">
 
