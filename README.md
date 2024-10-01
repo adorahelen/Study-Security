@@ -81,7 +81,7 @@ https://docs.spring.io/spring-security/site/docs/current/api/
 - JWT인증 방식을 통해 세션을 사용하지 않고 Form Login을 구현 가능 (토큰-> 쿠키)
     * 클라이언트와 서버 간의 Stateless인증을 가능하게 함 -> Stateful인증을 사용하는 세션의 대안
     * jwt의 버전에 따라 JWT를 빌드하는 메서드가 달라질 수 있음
-
+      
 - UsernamePasswordAuthenticationFilter에서의 인증 대신 JWT를 사용하여 인증을 진행하는 커스텀 필터인 JwtAuthFilter를 생성
 - JwtAuthFilter에서 헤더에 담긴 accessToken을 파싱하여 유효성 검증 후, accessToken으로 Authentication 객체를 생성하여 인증정보를 관리하는 SecurityContext에 넣어 인증을 완료
     * UsernamePasswordAuthenticationFilter에서 -> 당 역할을 JwtAuthenticationFilter에 위임
@@ -103,3 +103,11 @@ https://docs.spring.io/spring-security/site/docs/current/api/
 - 요약 : 엑세스 토큰이 만료되어 재발급되는 과정은 토큰 만료 시점에 서버로 요청을 보낼 때 발생
     * 이때 401 응답을 확인하고 발급 || 만료 시간을 추적하여 미리 갱신 
 
+- Access Token은 매번 API 서버와 호출되는 서비스 사이에서 오고 감 (in http header)
+    * 따라서 탈취의 가능성이 높아 만료시간을 짧게 지정하고 리프레쉬 토큰과 병행하여 사용
+- JWT 를 이용한다고 해서 반드시 accesstoken과 refreshtoken 을 이용해야 하는건 아님
+    * jwt 목표는 서버측 부하를 줄이는 것
+    * 따라서 사용자의 정보를 바탕으로 토큰을 발행하여 지니게 하고(클라이언트가),
+    * 사용자의 서비스 요청시 이를 확인하는 바탕으로 서비스를 구축하면 소정의 목표는 달성
+    * 리프레쉬 토큰의 필요성은, 엑세스 토큰은 탈취를 가정하고(매번 엑스스 토큰이 http에 담겨서 사용되니 취약)
+    * 엑세스의 만료시간을 10분 
