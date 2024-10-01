@@ -14,6 +14,7 @@ import java.io.IOException;
 @Slf4j
 @Component
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
+// Use, jwt config
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)

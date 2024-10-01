@@ -12,22 +12,10 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class JwtInfoDto { // 로그인 시 return 할 토큰 정보
-    // JsonFormat 애노테이션을 사용하여 Date의 데이터 포맷을 String으로 변경한다.
-
+public class AccessTokenDto {
     private String grantType;
-
-    // ===================================
-
     private String accessToken;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date accessTokenExpireTime;
-
-    // ====================================
-
-    private String refreshToken;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private Date refreshTokenExpireTime;
 }

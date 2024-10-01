@@ -38,6 +38,7 @@ public class User {
 
     public UserDTO toUserInfoDto() {
         return UserDTO.builder()
+                .id(getId())
                 .email(getEmail())
                 .password(getPassword())
                 .role(getRole())

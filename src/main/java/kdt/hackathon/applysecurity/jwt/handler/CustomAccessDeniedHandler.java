@@ -14,6 +14,7 @@ import java.io.IOException;
 @Slf4j
 @Component
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
+// Use, jwt config
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException)
