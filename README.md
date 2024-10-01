@@ -82,3 +82,7 @@ https://docs.spring.io/spring-security/site/docs/current/api/
     * 클라이언트와 서버 간의 Stateless인증을 가능하게 함 -> Stateful인증을 사용하는 세션의 대안
     * jwt의 버전에 따라 JWT를 빌드하는 메서드가 달라질 수 있음
 
+- UsernamePasswordAuthenticationFilter에서의 인증 대신 JWT를 사용하여 인증을 진행하는 커스텀 필터인 JwtAuthFilter를 생성
+- JwtAuthFilter에서 헤더에 담긴 accessToken을 파싱하여 유효성 검증 후, accessToken으로 Authentication 객체를 생성하여 인증정보를 관리하는 SecurityContext에 넣어 인증을 완료
+    * UsernamePasswordAuthenticationFilter에서 -> 당 역할을 JwtAuthenticationFilter에 위임
+    * 
