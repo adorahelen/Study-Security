@@ -70,7 +70,12 @@ https://docs.spring.io/spring-security/site/docs/current/api/
 	6.	로그아웃: 클라이언트 측에서 JWT를 삭제하면 로그아웃 처리가 됩니다. 서버는 상태를 저장하지 않기 때문에 별도로 세션을 만료시킬 필요는 없습니다.
 
 
-- 세션과 토큰의 차이
+ - 1-1 : 이때 JOSN 형식으로 데이터를 보내야함 (ex: front, js-fetch || 서버 후처리)
+ - 2-1 : 리프레쉬는 필수가 아님, 엑세스 보완 목적, 일단 목표는 "Statless (무상태)"
+ - 3-1 : 저장방식은 로컬||세션||쿠키
+ - 4-1 : 토큰 검증 방법,  API 호출 전 필터에 적용(검증로직) or 특정 API 요청 시마다 로직적용(||전부)
+ - 5-1 : 엑세스 토큰, 리프레쉬 토큰, 쿠키는 모두 유효기간 지정 가능 (로컬 저장은 로직 필요)
+
 
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/529905ce-761d-4b65-99c6-5b6eeb32fa14">
 
