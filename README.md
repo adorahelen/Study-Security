@@ -70,7 +70,12 @@ https://docs.spring.io/spring-security/site/docs/current/api/
 	6.	로그아웃: 클라이언트 측에서 JWT를 삭제하면 로그아웃 처리가 됩니다. 서버는 상태를 저장하지 않기 때문에 별도로 세션을 만료시킬 필요는 없습니다.
 
 
-- 세션과 토큰의 차이
+ - 1-1 : 이때 JOSN 형식으로 데이터를 보내야함 (ex: front, js-fetch || 서버 후처리)
+ - 2-1 : 리프레쉬는 필수가 아님, 엑세스 보완 목적, 일단 목표는 "Statless (무상태)"
+ - 3-1 : 저장방식은 로컬||세션||쿠키
+ - 4-1 : 토큰 검증 방법,  API 호출 전 필터에 적용(검증로직) or 특정 API 요청 시마다 로직적용(||전부)
+ - 5-1 : 엑세스 토큰, 리프레쉬 토큰, 쿠키는 모두 유효기간 지정 가능 (로컬 저장은 로직 필요)
+
 
 <img width="901" alt="image" src="https://github.com/user-attachments/assets/529905ce-761d-4b65-99c6-5b6eeb32fa14">
 
@@ -81,8 +86,33 @@ https://docs.spring.io/spring-security/site/docs/current/api/
 - JWT인증 방식을 통해 세션을 사용하지 않고 Form Login을 구현 가능 (토큰-> 쿠키)
     * 클라이언트와 서버 간의 Stateless인증을 가능하게 함 -> Stateful인증을 사용하는 세션의 대안
     * jwt의 버전에 따라 JWT를 빌드하는 메서드가 달라질 수 있음
-
+      
 - UsernamePasswordAuthenticationFilter에서의 인증 대신 JWT를 사용하여 인증을 진행하는 커스텀 필터인 JwtAuthFilter를 생성
 - JwtAuthFilter에서 헤더에 담긴 accessToken을 파싱하여 유효성 검증 후, accessToken으로 Authentication 객체를 생성하여 인증정보를 관리하는 SecurityContext에 넣어 인증을 완료
     * UsernamePasswordAuthenticationFilter에서 -> 당 역할을 JwtAuthenticationFilter에 위임
-    * 
+ 
+- 무중단 서비스 운영을 위한, 엑세스 토큰 만료시 리프레쉬 토큰 발급 절차 (실시간 확인 후 발급)
+    * 클라이언트가 서버로 인증이 필요한 API 요청을 보낼 때, 엑세스 토큰이 만료되었을 경우
+    *  <= 서버에서 401(Unauthorized) 상태 코드를 응답 & 아래와 같은 과정을 거쳐 새로운 엑세스 토큰을 발급
+
+  	1.	Step 1: 클라이언트가 서버로 요청을 보낼 때 엑세스 토큰이 만료되었다고 응답(401)을 받음.
+	2.	Step 2: 클라이언트가 리프레시 토큰을 이용해 /api/v1/jwt/reissue 엔드포인트로 새로운 엑세스 토큰을 요청.
+	3.	Step 3: 서버가 새로운 엑세스 토큰을 발급하고 클라이언트에게 응답.
+	4.	Step 4: 클라이언트가 재발급받은 엑세스 토큰을 저장한 후, 실패했던 요청을 다시 재시도.
+
+- 주기 갱신 방법(만료 시간이 가까워지면, 발급을 강제 시킴?)
+  	1.	Step 1: 클라이언트는 엑세스 토큰의 만료 시간을 추적.
+	2.	Step 2: 만료 시간이 가까워졌을 때 /api/v1/jwt/reissue로 요청을 보내 새로운 토큰을 발급받음.
+	3.	Step 3: 발급받은 새로운 엑세스 토큰으로 클라이언트의 세션을 유지.
+
+- 요약 : 엑세스 토큰이 만료되어 재발급되는 과정은 토큰 만료 시점에 서버로 요청을 보낼 때 발생
+    * 이때 401 응답을 확인하고 발급 || 만료 시간을 추적하여 미리 갱신 
+
+- Access Token은 매번 API 서버와 호출되는 서비스 사이에서 오고 감 (in http header)
+    * 따라서 탈취의 가능성이 높아 만료시간을 짧게 지정하고 리프레쉬 토큰과 병행하여 사용
+- JWT 를 이용한다고 해서 반드시 accesstoken과 refreshtoken 을 이용해야 하는건 아님
+    * jwt 목표는 서버측 부하를 줄이는 것
+    * 따라서 사용자의 정보를 바탕으로 토큰을 발행하여 지니게 하고(클라이언트가),
+    * 사용자의 서비스 요청시 이를 확인하는 바탕으로 서비스를 구축하면 소정의 목표는 달성
+    * 리프레쉬 토큰의 필요성은, 엑세스 토큰은 탈취를 가정하고(매번 엑스스 토큰이 http에 담겨서 사용되니 취약)
+    * 엑세스의 만료시간을 10분 
