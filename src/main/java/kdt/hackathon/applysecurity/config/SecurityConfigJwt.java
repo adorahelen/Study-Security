@@ -34,8 +34,8 @@ public class SecurityConfigJwt {
     private final CustomAuthenticationEntryPoint authenticationEntryPoint;
 
     private static final String[] AUTH_WHITELIST = {
-            "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**", "/", "/login", "/signup",
-            "/api/v1/auth/**", "/swagger-ui/index.html#/", "/api/v1/jwt/reissue"
+            "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**", "/", "/login","/api/login", "/signup",
+            "/api/v1/auth/**", "/swagger-ui/index.html#/", "/api/v1/jwt/reissue", "/js/**"
     };
 
     @Bean
