@@ -8,7 +8,13 @@
 	1.	로컬 orgin/개인 브랜치에서 작업 -> 원격 origin/개인 브랜치로 "push" 
 	2.	원격 origin/개인 브랜치 -> 원격 origin/main 으로 "pull request"
 	3.	원격 origin/main -> 로컬 origin/main 으로 "pull & fetch" 
-	4.	로컬 origin/main -> 로컬 origin/main 으로 "Merge"
+	4.	로컬 origin/main -> 로컬 orgin/개인 브랜치로 "Merge"
+
+- 삼각형 방식 :
+
+	1.	원격 origin/main -> 로컬 origin/main 으로 "pull & fetch" 
+	2.	로컬 origin/main -> 로컬 origin/개인브랜치로 "Merge"
+	3.	로컬 origin/개인 브랜치 -> 원격 origin/main 으로 "pull request" 
 
 
 <img width="360" alt="image" src="https://github.com/user-attachments/assets/692ee68d-2bd0-4ec0-8f05-2e4ce2536c99">
