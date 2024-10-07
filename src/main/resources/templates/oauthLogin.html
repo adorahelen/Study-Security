@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>경로당 로그인</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+    <style>
+        .custom-background {
+            background-color: white;
+            height: 100vh;
+        }
+
+        .card {
+            border-radius: 1rem;
+            border: none;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        label {
+            color: #333;
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+        }
+
+        .text-center {
+            color: #333;
+        }
+
+        .social-btn {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .social-btn button {
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body class="custom-background">
+<section class="d-flex vh-100">
+    <div class="container-fluid row justify-content-center align-content-center">
+        <div class="card col-lg-4 col-md-6 col-sm-8 p-5">
+            <div class="card-body text-center">
+                <h2>새벽 네시 : "경로당"</h2>
+                <p class="text-center mt-2 mb-4"> 놀 줄 아 는 노 인 들 을 위한 만 남 서 비 스, </p>
+
+                <div class="mb-3">
+                    <label class="form-label">아이디</label>
+                    <input type="text" class="form-control" name="username" id="username">
+
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">비밀번호</label>
+                    <input type="password" class="form-control" name="password" id="password">
+                </div>
+
+                <!-- 로그인 버튼 -->
+                <div class="mb-2">
+                    <button id="login-btn" type="button" class="btn btn-primary btn-block">로그인</button>
+                </div>
+
+                <div class="mb-2">
+                <a href="/signup" class="btn btn-secondary btn-block">회원가입</a>
+                </div>
+
+
+                <!-- 소셜 로그인 버튼 -->
+                <div class = "mb-3">
+                    <a href="/oauth2/authorization/google">
+                        <img src="/img/google.png">
+                    </a>
+                </div>
+                <div class = "mb-3">
+                    <a href="/oauth2/authorization/kakao">
+                        <img src="/img/kakao.png">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/js/loginJson.js"></script>
+
+</body>
+</html>
