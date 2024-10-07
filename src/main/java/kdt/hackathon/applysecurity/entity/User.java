@@ -28,6 +28,28 @@ public class User {
     private Role role;
 
 
+    //OAuth관련키 저장
+    @Column(name="nickname",unique = true)
+    private String nickname;
+
+    @Lob
+    @Column(name = "profile_image", columnDefinition = "LONGBLOB")
+    private byte[] profileImage;  // 이미지 자체 저장
+
+    @Column(name = "profile_url")
+    private String profileUrl;  // 이미지 URL 저장
+
+    @Builder
+    public User(String email, String password, String nickname, byte[] profileImage, String profileUrl, Role role) {
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.profileImage = profileImage;
+        this.profileUrl = profileUrl;  // URL 저장(이미지 구별, 호출)
+        this.role = role;
+    }
+
+
     @Builder
     public User( String email, String password, Role role) {
         this.email = email;

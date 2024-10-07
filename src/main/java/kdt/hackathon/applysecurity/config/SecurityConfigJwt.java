@@ -6,9 +6,11 @@ import kdt.hackathon.applysecurity.jwt.config.JwtAuthenticationFilter2;
 import kdt.hackathon.applysecurity.jwt.config.JwtUtil;
 import kdt.hackathon.applysecurity.security.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -23,9 +25,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 //import spring.auth.jwt.JwtAuthenticationFilter;
 //import spring.auth.jwt.JwtUtil;
 
+
 @EnableWebSecurity
+@EnableMethodSecurity
 @Configuration
 @RequiredArgsConstructor
+@Log4j2
 public class SecurityConfigJwt {
 
     private final CustomUserDetailsService CustomUserDetailsService;
@@ -37,6 +42,8 @@ public class SecurityConfigJwt {
             "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**", "/", "/login","/api/login", "/signup",
             "/api/v1/auth/**", "/swagger-ui/index.html#/", "/api/v1/jwt/reissue", "/js/**"
     };
+
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -52,14 +59,17 @@ public class SecurityConfigJwt {
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
+
+        // JwtAuthFilter를 filterChain에 추가 (모든 요청 가로채고, 인증 객체 생성 후 시큐리티 홀더에 저장 여기서)
+        http
+                .addFilterBefore(jwtAuthenticationFilter2(), UsernamePasswordAuthenticationFilter.class);
+
         // 핸들링 정의 및 구성
         http.exceptionHandling((exceptionHandling) -> exceptionHandling
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .accessDeniedHandler(accessDeniedHandler));
 
-        // JwtAuthFilter를 filterChain에 추가 (모든 요청 가로채고, 인증 객체 생성 후 시큐리티 홀더에 저장 여기서)
-        http
-                .addFilterBefore(jwtAuthenticationFilter2(), UsernamePasswordAuthenticationFilter.class);
+
 
         // permit, authenticated 경로 설정
         http
