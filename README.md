@@ -1,5 +1,11 @@
 https://docs.spring.io/spring-security/site/docs/current/api/
 
+# 깃허브 협업방식 정리
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/e577033f-e38f-43e6-9b03-6c2af8fd7b64">
+
+
+
+
 
 # 로그인 방식의 종류 
 <img width="623" alt="image" src="https://github.com/user-attachments/assets/d96becce-b677-47eb-96ac-f978e62298b4">
