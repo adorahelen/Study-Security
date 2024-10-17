@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -13,7 +16,9 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.security.Key;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Set;
 
 import static java.lang.System.currentTimeMillis;
 
@@ -167,5 +172,18 @@ public class JwtUtil {
     // 5.
     public Long getAccessTokenExpireTime() {
         return this.accessTokenExpireTime;
+    }
+
+
+    //토큰 기반으로 인증 정보를 가져오는 메서드
+    public Authentication getAuthentication(String token) {
+        Claims claims = getClaims(token); // 토큰에서 클레임을 가져옴
+        //기본적으로 "ROLE_USER" 권한을 부여
+        Set<SimpleGrantedAuthority> authorities= Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+
+        return new UsernamePasswordAuthenticationToken(new org.springframework.security.core.userdetails.User(
+                claims.getSubject(),"",authorities),token,authorities);
+        //Authentication 객체를 생성
+        // 이 객체는 Spring Security에서 사용자 인증 정보를 저장하고 관리하는 데 사용됩니다.
     }
 }

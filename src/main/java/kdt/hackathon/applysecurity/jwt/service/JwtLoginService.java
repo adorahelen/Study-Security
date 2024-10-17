@@ -2,7 +2,7 @@ package kdt.hackathon.applysecurity.jwt.service;
 
 import kdt.hackathon.applysecurity.entity.User;
 import kdt.hackathon.applysecurity.entity.UserDTO;
-import kdt.hackathon.applysecurity.jsonLogin.controller.dto.LoginRequest;
+import kdt.hackathon.applysecurity.jwt.controller.dto.LoginRequest;
 import kdt.hackathon.applysecurity.jwt.config.JwtUtil;
 import kdt.hackathon.applysecurity.jwt.controller.dto.JwtInfoDto;
 import kdt.hackathon.applysecurity.repository.UserRepository;

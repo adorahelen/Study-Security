@@ -2,7 +2,7 @@ package kdt.hackathon.applysecurity.jwt.controller;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
-import kdt.hackathon.applysecurity.jsonLogin.controller.dto.LoginRequest;
+import kdt.hackathon.applysecurity.jwt.controller.dto.LoginRequest;
 import kdt.hackathon.applysecurity.jwt.controller.dto.JwtInfoDto;
 import kdt.hackathon.applysecurity.jwt.service.JwtLoginService;
 import lombok.RequiredArgsConstructor;

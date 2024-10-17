@@ -6,31 +6,20 @@ import kdt.hackathon.applysecurity.jwt.config.JwtAuthenticationFilter2;
 import kdt.hackathon.applysecurity.jwt.config.JwtUtil;
 import kdt.hackathon.applysecurity.security.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-//import spring.auth.auth.handler.CustomAccessDeniedHandler;
-//import spring.auth.auth.handler.CustomAuthenticationEntryPoint;
-//import spring.auth.auth.service.CustomUserDetailsService;
-//import spring.auth.enums.Role;
-//import spring.auth.jwt.JwtAuthenticationFilter;
-//import spring.auth.jwt.JwtUtil;
 
 
-@EnableWebSecurity
-@EnableMethodSecurity
+
+
 @Configuration
 @RequiredArgsConstructor
-@Log4j2
 public class SecurityConfigJwt {
 
     private final CustomUserDetailsService CustomUserDetailsService;
@@ -38,58 +27,58 @@ public class SecurityConfigJwt {
     private final CustomAccessDeniedHandler accessDeniedHandler;
     private final CustomAuthenticationEntryPoint authenticationEntryPoint;
 
-    private static final String[] AUTH_WHITELIST = {
-            "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**", "/", "/login","/api/login", "/signup",
-            "/api/v1/auth/**", "/swagger-ui/index.html#/", "/api/v1/jwt/reissue", "/js/**"
-    };
-
+    @Bean
+    public WebSecurityCustomizer configure() { //스프링 시큐리티 기능 비활성화
+        return (web) -> web.ignoring()
+                .requestMatchers("/img/**", "/css/**", "/js/**"); //정적 자원에 대한 경로를 보안 검사에서 제외
+    }
 
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         //CSRF, CORS
-        http
-                .csrf(AbstractHttpConfigurer::disable)
-                .cors(Customizer.withDefaults())
-                .httpBasic(AbstractHttpConfigurer::disable)
-                .formLogin(AbstractHttpConfigurer::disable);
 
-        //세션 관리 상태 없음으로 구성
-        http
-                .sessionManagement(sessionManagement -> sessionManagement
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http.csrf(csrf -> csrf.disable())  // CSRF 보호 비활성화 (API에서 주로 사용)
+                .httpBasic(httpBasic -> httpBasic.disable())  // 기본 HTTP 인증 비활성화
+                .formLogin(formLogin -> formLogin.disable())  // 기본 폼 로그인 비활성화
+                .logout(logout -> logout.disable());  // 기본 로그아웃 비활성화
+
+
+        http.sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
+        // 세션 무상태(STATELESS)가 맞지만, 그러면 사용자 정보를 매번 프론트에서 받아와야 함
+        // => 처음 한번은 무조건 받아와야 하지만, 한번 받아서 인증 시키면 그 이후로는 시큐리티 컨텍스트 홀더 혹은 프린시펄 혹은 어센틱케이션에서 가능
 
 
         // JwtAuthFilter를 filterChain에 추가 (모든 요청 가로채고, 인증 객체 생성 후 시큐리티 홀더에 저장 여기서)
-        http
-                .addFilterBefore(jwtAuthenticationFilter2(), UsernamePasswordAuthenticationFilter.class);
+        // 일반 스프링 시큐리티의 경우 매니저&프로바이더 등이 필요하지만 jwt 로 커스텀 하는 경우 필터에서 바로 때려밖음
+        http.addFilterBefore(jwtAuthenticationFilter2(), UsernamePasswordAuthenticationFilter.class);
+
+
+        http.authorizeRequests()
+                .requestMatchers("/api/token", "/api/upload/**", "/api/login", "/ws/**").permitAll() // 인증 필요 없음
+                .requestMatchers("/api/**").authenticated()  // API 요청은 인증이 필요
+                //  .requestMatchers("/mypage").authenticated() // Only authenticated users can access
+                .anyRequest().permitAll();  // 그 외 모든 요청은 인증 필요 없음
 
         // 핸들링 정의 및 구성
-        http.exceptionHandling((exceptionHandling) -> exceptionHandling
-                .authenticationEntryPoint(authenticationEntryPoint)
-                .accessDeniedHandler(accessDeniedHandler));
-
-
-
-        // permit, authenticated 경로 설정
-        http
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll() // 모든 요청 허용 (추후 인증 및 인가 조정)
-//                        .requestMatchers(AUTH_WHITELIST).permitAll() // 지정한 경로는 인증 없이 접근 허용
-//                        .anyRequest().authenticated()); // 나머지 모든 경로는 인증 필요
-                );
+//        http.exceptionHandling((exceptionHandling) -> exceptionHandling
+//                .authenticationEntryPoint(authenticationEntryPoint)
+//                .accessDeniedHandler(accessDeniedHandler));
 
         return http.build();
     }
 
-    // 커스텀(토큰) 필터 빈으로 등록
+    //JWT 토큰을 확인하고 인증하는 커스텀 필터
     @Bean
     public JwtAuthenticationFilter2 jwtAuthenticationFilter2() {
-        return new JwtAuthenticationFilter2(CustomUserDetailsService, jwtUtil);
+        return new JwtAuthenticationFilter2(jwtUtil, CustomUserDetailsService);
     }
 
-        @Bean
+    @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }
+

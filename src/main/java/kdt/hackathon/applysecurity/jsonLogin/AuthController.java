@@ -1,6 +1,6 @@
 //package kdt.hackathon.applysecurity.jsonLogin.controller;
 //
-//import kdt.hackathon.applysecurity.jsonLogin.controller.dto.LoginRequest;
+//import kdt.hackathon.applysecurity.jwt.controller.dto.LoginRequest;
 //import lombok.RequiredArgsConstructor;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package kdt.hackathon.applysecurity.jsonLogin.controller.dto;
+package kdt.hackathon.applysecurity.jwt.controller.dto;
 
 import lombok.Data;
 

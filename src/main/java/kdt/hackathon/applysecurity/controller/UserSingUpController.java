@@ -1,6 +1,6 @@
 package kdt.hackathon.applysecurity.controller;
 
-import kdt.hackathon.applysecurity.controller.dto.WebSingUpRequest;
+import kdt.hackathon.applysecurity.controller.dto.AddUserRequest;
 import kdt.hackathon.applysecurity.service.UserSingUpService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -17,9 +17,9 @@ public class UserSingUpController {
     private final UserSingUpService userSingUpService;
 
     @PostMapping("/api/user")
-    public String userSingUp(@ModelAttribute WebSingUpRequest webSingUpRequest) {
-        log.info(webSingUpRequest.toString());
-        userSingUpService.save(webSingUpRequest);
+    public String userSingUp(@ModelAttribute AddUserRequest addUserRequest) {
+        log.info(addUserRequest.toString());
+        userSingUpService.save(addUserRequest);
         return "redirect:/login";
     }
 } // 폼 태그로 보내기 때문에, @RequestBody 가 아닌 @ModelAttribute

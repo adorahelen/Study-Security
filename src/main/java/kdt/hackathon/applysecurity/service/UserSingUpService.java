@@ -1,43 +1,50 @@
 package kdt.hackathon.applysecurity.service;
 
-import kdt.hackathon.applysecurity.controller.dto.WebSingUpRequest;
+import kdt.hackathon.applysecurity.controller.dto.AddUserRequest;
 import kdt.hackathon.applysecurity.entity.Role;
 import kdt.hackathon.applysecurity.entity.User;
 import kdt.hackathon.applysecurity.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.io.IOException;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
 public class UserSingUpService {
-    private static final Logger log = LoggerFactory.getLogger(UserSingUpService.class);
+
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public Long save(WebSingUpRequest singUpData) {
-        log.info(singUpData.toString());
+    public Long save(AddUserRequest dto) {
 
-        Boolean isExist = userRepository.existsByEmail(singUpData.getEmail());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        byte[] profileImageBytes = null;
+        String profileUrl = null;
 
-        if (isExist) {
-            return null;
-        } else {
-            User user = User.builder()
-                    .email(singUpData.getEmail())
-                    .password(bCryptPasswordEncoder.encode(singUpData.getPassword()))
-                    .role(Role.ROLE_USER)
-                    .build();
-
-            log.info(user.toString());
-            return userRepository.save(user).getId();
-
-
+        if (!dto.getProfileImage().isEmpty()) {
+            try {
+                profileImageBytes = dto.getProfileImage().getBytes();
+                String fileName = UUID.randomUUID() + "_" + dto.getProfileImage().getOriginalFilename();
+                profileUrl = fileName;
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Failed to process the profile image", e);
+            }
         }
+
+        User user = User.builder()
+                .email(dto.getEmail())
+                .password(encoder.encode(dto.getPassword()))
+                .nickname(dto.getNickname())
+                .profileImage(profileImageBytes)
+                .profileUrl(profileUrl)
+                .role(Role.ROLE_USER)
+                .build();
+
+        return userRepository.save(user).getId();
     }
 }
 

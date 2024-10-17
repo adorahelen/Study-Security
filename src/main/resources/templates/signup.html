@@ -2,50 +2,99 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>회원 가입</title>
+    <title>경로당 회원가입</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 
     <style>
-        .gradient-custom {
-            background: linear-gradient(to right, rgba(254, 238, 229, 1), rgba(229, 193, 197, 1))
+        .custom-background {
+            background-color: white;
+            height: 100vh;
         }
+
+        .card {
+            border-radius: 1rem;
+            border: none;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        label {
+            color: #333;
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+        }
+
+        .text-center {
+            color: #333;
+        }
+
+        .social-btn {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .social-btn button {
+            width: 100%;
+        }
+
     </style>
 </head>
-<body class="gradient-custom">
+<body class="custom-background">
 <section class="d-flex vh-100">
     <div class="container-fluid row justify-content-center align-content-center">
-        <div class="card bg-dark" style="border-radius: 1rem;">
-            <div class="card-body p-5 text-center">
-                <h2 class="text-white">SIGN UP</h2>
-                <p class="text-white-50 mt-2 mb-5">서비스 사용을 위한 회원 가입</p>
+        <div class="card col-lg-4 col-md-6 col-sm-8 p-5">
+            <div class="card-body text-center">
+                <h2>경로당 서비스 : "회원가입"</h2>
+                <p class="text-center mt-2 mb-4"> 경로당에서 필요한 정보를 입력해주세요!  </p>
 
                 <div class = "mb-2">
-                    <form th:action="@{/api/user}" method="POST">
+                    <form th:action="@{/user}" method="POST" enctype="multipart/form-data"> <!-- Add enctype attribute -->
                         <!-- 토큰을 추가하여 CSRF 공격 방지 -->
                         <input type="hidden" th:name="${_csrf?.parameterName}" th:value="${_csrf?.token}" />
 
                         <div class="mb-3">
-                            <label class="form-label text-white">사용할 이메일</label>
-                            <input type="email" class="form-control" name="email">
-<!--                            여기 뒷 부분 이름이 달라도(디티오랑 달라도? 엔티티랑 달라도 안들어감)-->
+                            <label class="form-label">이메일</label>
+                            <input type="email" class="form-control" name="email" required>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label text-white">사용할 비밀번호</label>
-                            <input type="password" class="form-control" name="password">
+                            <label class="form-label">비밀번호</label>
+                            <input type="password" class="form-control" name="password" required>
                         </div>
 
-<!--                        <div class="mb-3">-->
-<!--                            <label class="form-label text-white">생년월일(6자리)</label>-->
-<!--                            <input type="birthDate" class="form-control" name="birthDate">-->
-<!--                        </div>-->
-<!--                        -->
-<!--                        <div class="mb-3">-->
-<!--                            <label class="form-label text-white">성함(이름)</label>-->
-<!--                            <input type="name" class="form-control" name="name">-->
-<!--                        </div>-->
+                        <div class="mb-3">
+                            <label class="form-label">닉네임</label>
+                            <input type="text" class="form-control" name="nickname" required>
+                        </div>
 
-                        <button type="submit" class="btn btn-primary">등록</button>
+                        <div class="mb-3">
+                            <label class="form-label">프로필 이미지</label>
+                            <input type="file" class="form-control" name="profileImage" accept="image/*"> <!-- Use type="file" -->
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">회원가입 완료</button>
                     </form>
                 </div>
             </div>
