@@ -1,7 +1,32 @@
+# 깃허브 협업방식
+
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/e577033f-e38f-43e6-9b03-6c2af8fd7b64">
+
+- 한 사람이 리포지토리를 만들어 작업(H) -> frok (나머지), checkout 을 통해 로컬 환경을 두개로 설정 (origin/main & origin/개인브랜치)
+- 사각형 방식 :
+
+	1.	로컬 orgin/개인 브랜치에서 작업 -> 원격 origin/개인 브랜치로 "push" 
+	2.	원격 origin/개인 브랜치 -> 원격 origin/main 으로 "pull request"
+	3.	원격 origin/main -> 로컬 origin/main 으로 "pull & fetch" 
+	4.	로컬 origin/main -> 로컬 orgin/개인 브랜치로 "Merge"
+
+- 삼각형 방식 :
+
+	1.	원격 origin/main -> 로컬 origin/main 으로 "pull & fetch" 
+	2.	로컬 origin/main -> 로컬 origin/개인브랜치로 "Merge"
+	3.	로컬 origin/개인 브랜치 -> 원격 origin/main 으로 "pull request" 
+
+
+<img width="360" alt="image" src="https://github.com/user-attachments/assets/692ee68d-2bd0-4ec0-8f05-2e4ce2536c99">
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/180ef5bd-164f-497f-a872-7ac495e66cb4">
+<img width="641" alt="image" src="https://github.com/user-attachments/assets/9f2ad20b-dab6-408f-9ef2-952db0c91be2">
+
+
+
+# 스프링 시큐리티
 https://docs.spring.io/spring-security/site/docs/current/api/
 
-
-# 로그인 방식의 종류 
+## 로그인 방식의 종류 
 <img width="623" alt="image" src="https://github.com/user-attachments/assets/d96becce-b677-47eb-96ac-f978e62298b4">
 
 - FormLogin 은 주로 세션(스프링 시큐리티 기본 제공)과 함께 쓰임 
