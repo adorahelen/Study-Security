@@ -1,4 +1,11 @@
-# 깃허브 협업방식
+# 깃허브 콜라보방식, 이슈생성
+<img width="395" alt="image" src="https://github.com/user-attachments/assets/da8f0928-f0ea-4461-8c0f-f8aeb08681d9">
+<img width="565" alt="image" src="https://github.com/user-attachments/assets/2c0d2781-736d-44d6-bac5-c237738c345a">
+
+
+
+
+# 깃허브 협업방식 (컨트리 방식)
 
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/e577033f-e38f-43e6-9b03-6c2af8fd7b64">
 
